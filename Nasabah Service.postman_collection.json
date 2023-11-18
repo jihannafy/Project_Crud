@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "0aa8e29f-8cc8-4558-98e2-f02864ecbae7",
+		"name": "Nasabah Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28588219"
+	},
+	"item": [
+		{
+			"name": "Get Nasabah",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/your-entities",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"your-entities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Nasabah",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"noCif\": \"0001\",\r\n    \"cabang\": \"Kiaracondong\",\r\n    \"accountOfficer\": \"Admin 1\",\r\n    \"namaLengkap\": \"Customer 1\",\r\n    \"namaSingkat\": \"CS1\",\r\n    \"namaAlias\": \"C1\",\r\n    \"namaIbu\": \"Customer 1\",\r\n    \"jenisKelamin\": \"Laki-laki\",\r\n    \"tempatLahir\": \"Kota Bandung\",\r\n    \"tanggalLahir\": \"2001-01-01\",\r\n    \"tanggalPembukuan\": \"2023-01-01\",\r\n    \"jenisIdentitas\": \"KTP\",\r\n    \"noIdentitas\": \"12345678901234567\",\r\n    \"alamat\": \"Jl. Nasabah\",\r\n    \"rt\": 1,\r\n    \"kelurahan\": \"Babakan Surabaya\",\r\n    \"provinsi\": \"Jawa Barat\",\r\n    \"negara\": \"Indonesia\",\r\n    \"noNPWP\": \"-\",\r\n    \"noHp\": \"081234567890\",\r\n    \"masaBerlaku\": 12,\r\n    \"kodePos\": \"40281\",\r\n    \"kecamatan\": \"Kiaracondong\",\r\n    \"kabupatenKota\": \"Kota Bandung\",\r\n    \"keterangan\": \"-\",\r\n    \"rw\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/your-entities",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"your-entities"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
