@@ -2,9 +2,19 @@ package packageFrontend;
 
 
 import javax.swing.*;
-
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import org.json.JSONObject;
 
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import packageFrontend.*;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,21 +22,35 @@ import java.awt.event.ActionListener;
 
 public class PanelCIF {
 
-     private JPanel panelCIF;
-    // private JTextField fieldNoCIF;
-    // private JComboBox<String> comboBoxCabang;
-    // private JComboBox<String> comboBoxOfficer;
-    // private JTextField fieldTglPembukuan;
-    // private JTextField fieldNamaLengkap;
-    // private JTextField fieldNamaSingkat;
-    // private JTextField fieldNamaAlias;
-    // private JTextField fieldNamaIbu;
-    // private JTextField fieldTempatLahir;
-    // private JTextField fieldTanggalLahir;
-    // private JRadioButton radioPerempuan;
-    // private JRadioButton radioLakiLaki;
-    // private ButtonGroup buttonGroup;
+    private JPanel panelCIF;
+    private JTextField fieldNoCIF;
+    private JComboBox<String> comboBoxCabang;
+    private JComboBox<String> comboBoxOfficer;
+    private JTextField fieldTglPembukuan;
+    private JTextField fieldNamaLengkap;
+    private JTextField fieldNamaSingkat;
+    private JTextField fieldNamaAlias;
+    private JTextField fieldNamaIbu;
+    private JTextField fieldTempatLahir;
+    private JTextField fieldTanggalLahir;
+    private JRadioButton radioPerempuan;
+    private JRadioButton radioLakiLaki;
+    private ButtonGroup buttonGroup;
 
+    private JTextField fieldNoIdentitas;
+    private JTextField fieldAlamat;
+    private JTextField fieldRT;
+    private JTextField fieldRW;
+    private JTextField fieldKodePos;
+    private JTextField fieldKelurahan;
+    private JTextField fieldKecamatan;
+    private JComboBox<String> comboBoxProvinsi;
+    private JTextField fieldKabupatenKota;
+    private JComboBox<String> comboBoxNegara;
+    private JTextField fieldNoNPWP;
+    private JTextField fieldKeterangan;
+    private JTextField fieldNoHP;
+    private JTextField fieldMasaBerlaku;
 
     public PanelCIF() {
         panelCIF = new JPanel();
@@ -44,8 +68,8 @@ public class PanelCIF {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
-        JTextField fieldNoCIF = new JTextField(20);
-        fieldNoCIF.setEnabled(false); // Nonaktifkan field
+        fieldNoCIF = new JTextField(20);
+        fieldNoCIF.setEnabled(true); // Nonaktifkan field
         panelCIF.add(fieldNoCIF, gbc);
 
         gbc.gridx = 7;
@@ -55,8 +79,8 @@ public class PanelCIF {
 
         gbc.gridx = 8;
         gbc.gridy = 0;
-        JTextField fieldTglPembukuan = new JTextField(20);
-        fieldTglPembukuan.setEnabled(false); // Nonaktifkan field
+        fieldTglPembukuan = new JTextField(20);
+        fieldTglPembukuan.setEnabled(true); // Nonaktifkan field
         panelCIF.add(fieldTglPembukuan, gbc);
 
         gbc.gridx = 0;
@@ -68,8 +92,8 @@ public class PanelCIF {
         gbc.gridy = 1;
         gbc.gridwidth = 3;
         String[] cabangOptions = {"Cabang Antapani"};
-        JComboBox<String> comboBoxCabang = new JComboBox<>(cabangOptions);
-        comboBoxCabang.setEnabled(false); // Nonaktifkan JComboBox
+        comboBoxCabang = new JComboBox<>(cabangOptions);
+        comboBoxCabang.setEnabled(true); // Nonaktifkan JComboBox
         panelCIF.add(comboBoxCabang, gbc);
 
 
@@ -82,7 +106,7 @@ public class PanelCIF {
         gbc.gridy = 2;
         gbc.gridwidth = 3;
         String[] officerOptions = {"Officer A", "Officer B", "Officer C"};
-        JComboBox<String> comboBoxOfficer = new JComboBox<>(officerOptions);
+        comboBoxOfficer = new JComboBox<>(officerOptions);
         comboBoxOfficer.setEnabled(true); // Nonaktifkan JComboBox
         panelCIF.add(comboBoxOfficer, gbc);
 
@@ -93,7 +117,7 @@ public class PanelCIF {
         gbc.gridx = 1;
         gbc.gridy = 4;
         gbc.gridwidth = 3;
-        JTextField fieldNamaLengkap = new JTextField(20);
+        fieldNamaLengkap = new JTextField(20);
         fieldNamaLengkap.setEnabled(true);
         panelCIF.add(fieldNamaLengkap, gbc);
 
@@ -104,7 +128,7 @@ public class PanelCIF {
 
         gbc.gridx = 1;
         gbc.gridy = 5;
-        JTextField fieldNamaSingkat = new JTextField(20);
+        fieldNamaSingkat = new JTextField(20);
         fieldNamaSingkat.setEnabled(true);
         panelCIF.add(fieldNamaSingkat, gbc);
 
@@ -115,7 +139,7 @@ public class PanelCIF {
 
         gbc.gridx = 1;
         gbc.gridy = 6;
-        JTextField fieldNamaAlias = new JTextField(20);
+        fieldNamaAlias = new JTextField(20);
         fieldNamaAlias.setEnabled(true);
         panelCIF.add(fieldNamaAlias, gbc);
 
@@ -125,7 +149,7 @@ public class PanelCIF {
 
         gbc.gridx = 1;
         gbc.gridy = 7;
-        JTextField fieldNamaIbu = new JTextField(20);
+        fieldNamaIbu = new JTextField(20);
         fieldNamaIbu.setEnabled(true);
         panelCIF.add(fieldNamaIbu, gbc);
 
@@ -137,9 +161,9 @@ public class PanelCIF {
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 3;
-        JRadioButton radioPerempuan = new JRadioButton("Perempuan");
-        JRadioButton radioLakiLaki = new JRadioButton("Laki-laki");
-        ButtonGroup buttonGroup = new ButtonGroup();
+        radioPerempuan = new JRadioButton("Perempuan");
+        radioLakiLaki = new JRadioButton("Laki-laki");
+        buttonGroup = new ButtonGroup();
         buttonGroup.add(radioPerempuan);
         buttonGroup.add(radioLakiLaki);
         JPanel panelRadio = new JPanel();
@@ -153,14 +177,14 @@ public class PanelCIF {
         gbc.gridx = 1;
         gbc.gridy = 9;
         panelCIF.add(new JTextField(20), gbc);
-        JTextField fieldTempatLahir = new JTextField(20);
+        fieldTempatLahir = new JTextField(20);
         fieldTempatLahir.setEnabled(true);
         panelCIF.add(fieldTempatLahir, gbc);
 
         gbc.gridx = 3;
         gbc.gridy = 9;
         panelCIF.add(new JTextField(20), gbc);
-        JTextField fieldTanggalLahir = new JTextField(20);
+        fieldTanggalLahir = new JTextField(20);
         fieldTanggalLahir.setEnabled(true);
         panelCIF.add(fieldTanggalLahir, gbc);
 
@@ -171,18 +195,14 @@ public class PanelCIF {
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         JButton buttonSimpan = new JButton("Simpan");
-        // buttonSimpan.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e) {
-        //         JSONObject jsonObject = prepareData();
-        //         sendData(jsonObject);
+        buttonSimpan.addActionListener(e -> {
+            JSONObject dataToSend = prepareData(); // Fungsi untuk menyiapkan data dari komponen GUI
 
-        //         DataNasabah dataNasabah =ambilDataNasabah();
-        //         simpanDataNasabah(dataNasabah);
-
-        //     }
-        // });
+            // Kirim data ke backend
+            sendDataToBackend(dataToSend);
+        });
         panelCIF.add(buttonSimpan, gbc);
+        
 
         gbc.gridx = 18;
         gbc.gridy = 1;
@@ -197,13 +217,80 @@ public class PanelCIF {
         panelCIF.add(buttonReset, gbc);
     }
 
-    // private JSONObject prepareData() {
+    private JSONObject prepareData() {
+        JSONObject jsonObject = new JSONObject();
+        // Ambil data dari komponen GUI dan masukkan ke dalam objek JSON
+        jsonObject.put("noCif", fieldNoCIF.getText());
+        jsonObject.put("cabang", comboBoxCabang.getSelectedItem().toString());
+        jsonObject.put("accountOfficer", comboBoxOfficer.getSelectedItem().toString());
+        jsonObject.put("tanggalPembukuan", fieldTglPembukuan.getText().toString());
+        jsonObject.put("namaLengkap", fieldNamaLengkap.getText().toString());
+        jsonObject.put("namaSingkat", fieldNamaSingkat.getText().toString());
+        jsonObject.put("namaAlias", fieldNamaAlias.getText().toString());
+        jsonObject.put("namaIbu", fieldNamaIbu.getText().toString());
+        jsonObject.put("tempatLahir", fieldTempatLahir.getText().toString());
+        jsonObject.put("tanggalLahir", fieldTanggalLahir.getText().toString());
+        String jenisKelamin = "";
+        if (buttonGroup.getSelection() != null) {
+            if (radioPerempuan.isSelected()) {
+                jenisKelamin = "Perempuan";
+            } else if (radioLakiLaki.isSelected()) {
+                jenisKelamin = "Laki-laki";
+            }
+        }
+        jsonObject.put("jenis_kelamin", jenisKelamin);
 
-    //     JSONObject jsonObject = new JSONObject();
-    //     JTextField fieldNoCIF = (JTextField) panelCIF.getComponent(JTextField.fieldNoCIF); // Ganti dengan field yang sesuai
-    //     jsonObject.put("cabang", comboBoxCabang.getSelectedItem().toString()); // Ganti dengan field yang sesuai
-    //     jsonObject.put("accountOfficer", comboBoxOfficer.getSelectedItem().toString());
-    // }
+        //dari panel identitas
+        jsonObject.put("jenisIdentitas", fieldNoCIF.getText());
+        jsonObject.put("noIdentitas", fieldNoIdentitas.getText().toString());
+        jsonObject.put("alamat", fieldAlamat.getText().toString());
+        jsonObject.put("rt", fieldRT.getText().toString());
+        jsonObject.put("rw", fieldRW.getText().toString());
+        jsonObject.put("kodePos", fieldKodePos.getText().toString());
+        jsonObject.put("kelurahan", fieldKelurahan.getText().toString());
+        jsonObject.put("kecamatan", fieldKecamatan.getText().toString());
+        jsonObject.put("provinsi", comboBoxProvinsi.getSelectedItem().toString());
+        jsonObject.put("negara", comboBoxNegara.getSelectedItem().toString());
+        jsonObject.put("kabupatenKota", fieldKabupatenKota.getText().toString());
+        jsonObject.put("noNPWP", fieldNoNPWP.getText().toString());
+        jsonObject.put("keterangan", fieldKeterangan.getText().toString());
+        jsonObject.put("noHp", fieldNoHP.getText().toString());
+        jsonObject.put("masaBerlaku", fieldMasaBerlaku.getText().toString());
+        
+
+        return jsonObject;
+    }
+
+    private void sendDataToBackend(JSONObject data) {
+        try {
+            URL url = new URL("http://localhost:8081/api/your-entities");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
+
+            OutputStream os = conn.getOutputStream();
+            os.write(data.toString().getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+            }
+
+            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+            String output;
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+            }
+
+            conn.disconnect();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     public JPanel getPanelCIF() {
         return panelCIF;

@@ -6,6 +6,23 @@ import java.awt.*;
 public class PanelIdentitas {
 
     private JPanel panelidentitas;
+    // private JTextField fieldNoIdentitas;
+    // private JTextField fieldAlamat;
+    // private JTextField fieldRT;
+    // private JTextField fieldRW;
+    // private JTextField fieldKodePos;
+    // private JTextField fieldKelurahan;
+    // private JTextField fieldKecamatan;
+    // private JComboBox<String> comboBoxProvinsi;
+    // private JTextField fieldKabupatenKota;
+    // private JComboBox<String> comboBoxNegara;
+    // private JTextField fieldNoNPWP;
+    // private JTextField fieldKeterangan;
+    // private JTextField fieldNoHP;
+    // private JTextField fieldMasaBerlaku;
+    
+
+ 
 
     public PanelIdentitas() {
 
@@ -72,8 +89,8 @@ public class PanelIdentitas {
 
         gbcIdentitas.gridx = 1;
         gbcIdentitas.gridy = 3;
-        JTextField fieldRTRW = new JTextField(5);
-        panelidentitas.add(fieldRTRW, gbcIdentitas);
+        JTextField fieldRT = new JTextField(5);
+        panelidentitas.add(fieldRT, gbcIdentitas);
 
         gbcIdentitas.gridx = 2;
         gbcIdentitas.gridy = 3;
@@ -178,10 +195,94 @@ public class PanelIdentitas {
         gbcIdentitas.gridwidth = 5;
         JTextField fieldNoHP = new JTextField(20);
         panelidentitas.add(fieldNoHP, gbcIdentitas);
+
     }
 
-    // No hp
+    // // supaya bisa dipanggil
+    // public String getNoIdentitas() {
+    //     return fieldNoIdentitas.getText();
 
+    // }
+
+    // public String getJenisIdentitas() {
+    //     return fieldNoIdentitas.getText();
+    // }
+
+    // public String getAlamat(){
+    //     return fieldAlamat.getText();
+    // }
+
+    // public Integer getRT() {
+    //     try {
+    //         String rtText = fieldRT.getText();
+    //         // Konversi teks ke Integer
+    //         return Integer.parseInt(rtText);
+    //     } catch (NumberFormatException e) {
+    //         // Tangani jika terjadi kesalahan saat parsing
+    //         e.printStackTrace(); // Atau lakukan penanganan lainnya sesuai kebutuhan
+    //         return null; // Atau kembalikan nilai default jika terjadi kesalahan
+    //     }
+    // }
+
+    // public Integer getRW() {
+    //     try {
+    //         String rwText = fieldRW.getText();
+    //         // Konversi teks ke Integer
+    //         return Integer.parseInt(rwText);
+    //     } catch (NumberFormatException e) {
+    //         // Tangani jika terjadi kesalahan saat parsing
+    //         e.printStackTrace(); // Atau lakukan penanganan lainnya sesuai kebutuhan
+    //         return null; // Atau kembalikan nilai default jika terjadi kesalahan
+    //     }
+    // }
+
+    // public String getKodePos() {
+    //     return fieldKodePos.getText();
+    // }
+   
+    // public String getKelurahan() {
+    //     return fieldKelurahan.getText();
+    // }
+
+    // public String getKecamatan() {
+    //     return fieldKecamatan.getText();
+    // }
+    
+    // public String getProvinsi() {
+    //     return (String) comboBoxProvinsi.getSelectedItem();
+    // }
+
+    // public String getNegara() {
+    //     return (String) comboBoxNegara.getSelectedItem();
+    // }
+
+    // public String getKabupatenKota() {
+    //     return fieldKabupatenKota.getText();
+    // }
+
+    // public String getNoNPWP() {
+    //     return fieldNoNPWP.getText();
+    // }
+
+    // public String getKeterangan() {
+    //     return fieldKeterangan.getText();
+    // }
+
+    // public String getNoHP() {
+    //     return fieldNoHP.getText();
+    // }
+
+    // public Integer getMasaBerlaku() {
+    //     try {
+    //         String MasaBerlakuText = fieldMasaBerlaku.getText();
+    //         // Konversi teks ke Integer
+    //         return Integer.parseInt(MasaBerlakuText);
+    //     } catch (NumberFormatException e) {
+    //         // Tangani jika terjadi kesalahan saat parsing
+    //         e.printStackTrace(); // Atau lakukan penanganan lainnya sesuai kebutuhan
+    //         return null; // Atau kembalikan nilai default jika terjadi kesalahan
+    //     }
+    // }
 
     public JPanel getPanelidentitas() {
         return panelidentitas;
